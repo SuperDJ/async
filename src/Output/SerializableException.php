@@ -6,14 +6,9 @@ use Throwable;
 
 class SerializableException
 {
-    /** @var string */
-    protected $class;
-
-    /** @var string */
-    protected $message;
-
-    /** @var string */
-    protected $trace;
+    protected string $class;
+    protected string $message;
+    protected string $trace;
 
     public function __construct(Throwable $exception)
     {

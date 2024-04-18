@@ -7,9 +7,9 @@ use Throwable;
 
 trait ProcessCallbacks
 {
-    protected $successCallbacks = [];
-    protected $errorCallbacks = [];
-    protected $timeoutCallbacks = [];
+    protected array $successCallbacks = [];
+    protected array $errorCallbacks = [];
+    protected array $timeoutCallbacks = [];
 
     public function then(callable $callback): self
     {
@@ -32,12 +32,12 @@ trait ProcessCallbacks
         return $this;
     }
 
-    public function triggerSuccess()
+    public function triggerSuccess(): mixed
     {
         if ($this->getErrorOutput()) {
             $this->triggerError();
 
-            return;
+            return false;
         }
 
         $output = $this->getOutput();
@@ -49,7 +49,7 @@ trait ProcessCallbacks
         return $output;
     }
 
-    public function triggerError()
+    public function triggerError(): void
     {
         $exception = $this->resolveErrorOutput();
 
@@ -70,7 +70,7 @@ trait ProcessCallbacks
 
     abstract protected function resolveErrorOutput(): Throwable;
 
-    public function triggerTimeout()
+    public function triggerTimeout(): void
     {
         foreach ($this->timeoutCallbacks as $callback) {
             call_user_func_array($callback, []);

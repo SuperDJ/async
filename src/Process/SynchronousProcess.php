@@ -8,7 +8,7 @@ use Throwable;
 class SynchronousProcess implements Runnable
 {
     use ProcessCallbacks;
-    protected $id;
+    protected int $id;
 
     protected $task;
 
@@ -37,7 +37,7 @@ class SynchronousProcess implements Runnable
         return $this->getId();
     }
 
-    public function start()
+    public function start(): void
     {
         $startTime = microtime(true);
 
@@ -56,7 +56,7 @@ class SynchronousProcess implements Runnable
         }
     }
 
-    public function stop($timeout = 0): void
+    public function stop(int|float $timeout = 0): mixed
     {
     }
 

@@ -8,45 +8,45 @@ interface Runnable
 
     public function getPid(): ?int;
 
-    public function start();
+    public function start(): void;
 
     /**
      * @param callable $callback
      *
      * @return static
      */
-    public function then(callable $callback);
+    public function then(callable $callback): self;
 
     /**
      * @param callable $callback
      *
      * @return static
      */
-    public function catch(callable $callback);
+    public function catch(callable $callback): self;
 
     /**
      * @param callable $callback
      *
      * @return static
      */
-    public function timeout(callable $callback);
+    public function timeout(callable $callback): self;
 
     /**
      * @param int|float $timeout The timeout in seconds
      *
      * @return mixed
      */
-    public function stop($timeout = 0);
+    public function stop(int|float $timeout = 0): mixed;
 
     public function getOutput();
 
     public function getErrorOutput();
 
-    public function triggerSuccess();
+    public function triggerSuccess(): mixed;
 
-    public function triggerError();
+    public function triggerError(): void;
 
-    public function triggerTimeout();
+    public function triggerTimeout(): void;
 
     public function getCurrentExecutionTime(): float;
 }

@@ -6,14 +6,14 @@ use Spatie\Async\Task;
 
 class MyTask extends Task
 {
-    protected $i = 0;
+    protected int $i = 0;
 
-    public function configure()
+    public function configure(): void
     {
         $this->i = 2;
     }
 
-    public function run()
+    public function run(): int
     {
         return $this->i;
     }

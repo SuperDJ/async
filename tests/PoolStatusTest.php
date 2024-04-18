@@ -9,7 +9,7 @@ use Spatie\Async\Pool;
 class PoolStatusTest extends TestCase
 {
     /** @test */
-    public function it_can_show_a_textual_status()
+    public function it_can_show_a_textual_status(): void
     {
         $pool = Pool::create();
 
@@ -23,7 +23,7 @@ class PoolStatusTest extends TestCase
     }
 
     /** @test */
-    public function it_can_show_a_textual_failed_status()
+    public function it_can_show_a_textual_failed_status(): void
     {
         $pool = Pool::create();
 
@@ -43,7 +43,7 @@ class PoolStatusTest extends TestCase
     }
 
     /** @test */
-    public function it_can_show_timeout_status()
+    public function it_can_show_timeout_status(): void
     {
         $pool = Pool::create()->timeout(0);
 

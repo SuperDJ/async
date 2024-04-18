@@ -13,20 +13,16 @@ use Symfony\Component\Process\Process;
 
 class ParentRuntime
 {
-    /** @var bool */
-    protected static $isInitialised = false;
+    protected static bool $isInitialised = false;
+    protected static string $autoloader;
 
-    /** @var string */
-    protected static $autoloader;
+    protected static string $childProcessScript;
 
-    /** @var string */
-    protected static $childProcessScript;
+    protected static int $currentId = 0;
 
-    protected static $currentId = 0;
+    protected static int|null $myPid = null;
 
-    protected static $myPid = null;
-
-    public static function init(string $autoloader = null)
+    public static function init(string $autoloader = null): void
     {
         if (! $autoloader) {
             $existingAutoloaderFiles = array_filter([
@@ -98,7 +94,7 @@ class ParentRuntime
         return $serializedTask;
     }
 
-    public static function decodeTask(string $task)
+    public static function decodeTask(string $task): mixed
     {
         $decodedTask = unserialize(base64_decode($task));
 

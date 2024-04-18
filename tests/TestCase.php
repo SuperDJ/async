@@ -17,7 +17,7 @@ class TestCase extends BaseTestCase
         }
     }
 
-    public function assertMatchesRegExp($pattern, $string)
+    public function assertMatchesRegExp($pattern, $string): void
     {
         if (method_exists($this, 'assertMatchesRegularExpression')) {
             // PHPUnit 10+

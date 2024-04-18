@@ -10,14 +10,14 @@ use Throwable;
 class ParallelProcess implements Runnable
 {
     use ProcessCallbacks;
-    protected $process;
-    protected $id;
-    protected $pid;
+    protected Process $process;
+    protected int $id;
+    protected int|null $pid;
 
-    protected $output;
-    protected $errorOutput;
+    protected mixed $output;
+    protected mixed $errorOutput;
 
-    protected $startTime;
+    protected float $startTime;
 
     public function __construct(Process $process, int $id)
     {
@@ -41,7 +41,7 @@ class ParallelProcess implements Runnable
         return $this;
     }
 
-    public function stop($timeout = 0): self
+    public function stop(int|float $timeout = 0): self
     {
         $this->process->stop($timeout, SIGKILL);
 
@@ -63,7 +63,7 @@ class ParallelProcess implements Runnable
         return $this->process->isTerminated();
     }
 
-    public function getOutput()
+    public function getOutput(): mixed
     {
         if (! $this->output) {
             $processOutput = $this->process->getOutput();
@@ -78,7 +78,7 @@ class ParallelProcess implements Runnable
         return $this->output;
     }
 
-    public function getErrorOutput()
+    public function getErrorOutput(): mixed
     {
         if (! $this->errorOutput) {
             $processOutput = $this->process->getErrorOutput();

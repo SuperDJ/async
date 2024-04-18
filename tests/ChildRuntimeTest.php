@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 class ChildRuntimeTest extends TestCase
 {
     /** @test */
-    public function it_can_run()
+    public function it_can_run(): void
     {
         $bootstrap = __DIR__.'/../src/Runtime/ChildRuntime.php';
 

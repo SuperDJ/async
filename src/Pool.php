@@ -19,29 +19,29 @@ class Pool implements ArrayAccess
     protected $sleepTime = 50000;
 
     /** @var \Spatie\Async\Process\Runnable[] */
-    protected $queue = [];
+    protected array $queue = [];
 
     /** @var \Spatie\Async\Process\Runnable[] */
-    protected $inProgress = [];
+    protected array $inProgress = [];
 
     /** @var \Spatie\Async\Process\Runnable[] */
-    protected $finished = [];
+    protected array $finished = [];
 
     /** @var \Spatie\Async\Process\Runnable[] */
-    protected $failed = [];
+    protected array $failed = [];
 
     /** @var \Spatie\Async\Process\Runnable[] */
-    protected $timeouts = [];
+    protected array $timeouts = [];
 
-    protected $results = [];
+    protected array $results = [];
 
     protected $status;
 
-    protected $stopped = false;
+    protected bool $stopped = false;
 
-    protected $binary = PHP_BINARY;
+    protected string $binary = PHP_BINARY;
 
-    protected $maxTaskPayloadInBytes = 100000;
+    protected int $maxTaskPayloadInBytes = 100000;
 
     public function __construct()
     {
@@ -52,10 +52,7 @@ class Pool implements ArrayAccess
         $this->status = new PoolStatus($this);
     }
 
-    /**
-     * @return static
-     */
-    public static function create()
+    public static function create(): static
     {
         return new static();
     }
@@ -118,7 +115,7 @@ class Pool implements ArrayAccess
         return $this;
     }
 
-    public function notify()
+    public function notify(): void
     {
         if (count($this->inProgress) >= $this->concurrency) {
             return;
@@ -190,14 +187,14 @@ class Pool implements ArrayAccess
         return $this->results;
     }
 
-    public function putInQueue(Runnable $process)
+    public function putInQueue(Runnable $process): void
     {
         $this->queue[$process->getId()] = $process;
 
         $this->notify();
     }
 
-    public function putInProgress(Runnable $process)
+    public function putInProgress(Runnable $process): void
     {
         if ($this->stopped) {
             return;
@@ -214,7 +211,7 @@ class Pool implements ArrayAccess
         $this->inProgress[$process->getPid()] = $process;
     }
 
-    public function markAsFinished(Runnable $process)
+    public function markAsFinished(Runnable $process): void
     {
         unset($this->inProgress[$process->getPid()]);
 
@@ -225,7 +222,7 @@ class Pool implements ArrayAccess
         $this->finished[$process->getPid()] = $process;
     }
 
-    public function markAsTimedOut(Runnable $process)
+    public function markAsTimedOut(Runnable $process): void
     {
         unset($this->inProgress[$process->getPid()]);
 
@@ -237,7 +234,7 @@ class Pool implements ArrayAccess
         $this->notify();
     }
 
-    public function markAsFailed(Runnable $process)
+    public function markAsFailed(Runnable $process): void
     {
         unset($this->inProgress[$process->getPid()]);
 
@@ -315,7 +312,7 @@ class Pool implements ArrayAccess
         return $this->status;
     }
 
-    protected function registerListener()
+    protected function registerListener(): void
     {
         pcntl_async_signals(true);
 
@@ -346,7 +343,7 @@ class Pool implements ArrayAccess
         });
     }
 
-    protected function handleFinishedProcess(int $pid, int $status)
+    protected function handleFinishedProcess(int $pid, int $status): void
     {
         $process = $this->inProgress[$pid] ?? null;
 
@@ -363,7 +360,7 @@ class Pool implements ArrayAccess
         $this->markAsFailed($process);
     }
 
-    public function stop()
+    public function stop(): void
     {
         $this->stopped = true;
     }

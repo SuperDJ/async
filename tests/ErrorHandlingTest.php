@@ -12,7 +12,7 @@ use Spatie\Async\Pool;
 class ErrorHandlingTest extends TestCase
 {
     /** @test */
-    public function it_can_handle_exceptions_via_catch_callback()
+    public function it_can_handle_exceptions_via_catch_callback(): void
     {
         $pool = Pool::create();
 
@@ -30,7 +30,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_complex_exceptions_via_catch_callback()
+    public function it_can_handle_complex_exceptions_via_catch_callback(): void
     {
         $pool = Pool::create();
 
@@ -71,7 +71,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_typed_exceptions_via_catch_callback()
+    public function it_can_handle_typed_exceptions_via_catch_callback(): void
     {
         $pool = Pool::create();
 
@@ -108,7 +108,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_the_exception_if_no_catch_callback()
+    public function it_throws_the_exception_if_no_catch_callback(): void
     {
         $this->expectException(MyException::class);
         $this->expectExceptionMessageRegularExpression('/test/');
@@ -123,7 +123,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_throws_fatal_errors()
+    public function it_throws_fatal_errors(): void
     {
         $this->expectException(Error::class);
         $this->expectExceptionMessageRegularExpression('/test/');
@@ -138,7 +138,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_keeps_the_original_trace()
+    public function it_keeps_the_original_trace(): void
     {
         $pool = Pool::create();
 
@@ -154,7 +154,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_handles_stderr_as_parallel_error()
+    public function it_handles_stderr_as_parallel_error(): void
     {
         $pool = Pool::create();
 
@@ -168,7 +168,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function deep_syntax_errors_are_thrown()
+    public function deep_syntax_errors_are_thrown(): void
     {
         $pool = Pool::create();
 
@@ -182,7 +182,7 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_synchronous_exception()
+    public function it_can_handle_synchronous_exception(): void
     {
         Pool::$forceSynchronous = true;
 

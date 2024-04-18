@@ -26,7 +26,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_run_processes_in_parallel()
+    public function it_can_run_processes_in_parallel(): void
     {
         $pool = Pool::create();
 
@@ -46,7 +46,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_success()
+    public function it_can_handle_success(): void
     {
         $pool = Pool::create();
 
@@ -66,7 +66,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_configure_another_binary()
+    public function it_can_configure_another_binary(): void
     {
         $binary = __DIR__.'/another-php-binary';
 
@@ -96,7 +96,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_timeout()
+    public function it_can_handle_timeout(): void
     {
         $pool = Pool::create()
             ->timeout(1);
@@ -117,7 +117,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_millisecond_timeouts()
+    public function it_can_handle_millisecond_timeouts(): void
     {
         $pool = Pool::create()
             ->timeout(0.2);
@@ -138,7 +138,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_handle_a_maximum_of_concurrent_processes()
+    public function it_can_handle_a_maximum_of_concurrent_processes(): void
     {
         $pool = Pool::create()
             ->concurrency(2);
@@ -162,7 +162,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_works_with_helper_functions()
+    public function it_works_with_helper_functions(): void
     {
         $pool = Pool::create();
 
@@ -184,7 +184,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_use_a_class_from_the_parent_process()
+    public function it_can_use_a_class_from_the_parent_process(): void
     {
         $pool = Pool::create();
 
@@ -208,7 +208,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_all_the_output_as_an_array()
+    public function it_returns_all_the_output_as_an_array(): void
     {
         $pool = Pool::create();
 
@@ -228,7 +228,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_work_with_tasks()
+    public function it_can_work_with_tasks(): void
     {
         $pool = Pool::create();
 
@@ -240,7 +240,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_accept_tasks_with_pool_add()
+    public function it_can_accept_tasks_with_pool_add(): void
     {
         $pool = Pool::create();
 
@@ -252,13 +252,13 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_for_asynchronous_support()
+    public function it_can_check_for_asynchronous_support(): void
     {
         $this->assertTrue(Pool::isSupported());
     }
 
     /** @test */
-    public function it_can_run_invokable_classes()
+    public function it_can_run_invokable_classes(): void
     {
         $pool = Pool::create();
 
@@ -270,7 +270,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_reports_error_for_non_invokable_classes()
+    public function it_reports_error_for_non_invokable_classes(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -279,7 +279,7 @@ class PoolTest extends TestCase
         $pool->add(new NonInvokableClass());
     }
 
-    public function it_can_run_synchronous_processes()
+    public function it_can_run_synchronous_processes(): void
     {
         $pool = Pool::create();
 
@@ -303,7 +303,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_will_automatically_schedule_synchronous_tasks_if_pcntl_not_supported()
+    public function it_will_automatically_schedule_synchronous_tasks_if_pcntl_not_supported(): void
     {
         Pool::$forceSynchronous = true;
 
@@ -319,7 +319,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_takes_an_intermediate_callback()
+    public function it_takes_an_intermediate_callback(): void
     {
         $pool = Pool::create();
 
@@ -337,7 +337,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_takes_a_cancellable_intermediate_callback()
+    public function it_takes_a_cancellable_intermediate_callback(): void
     {
         $pool = Pool::create();
 
@@ -357,7 +357,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_stopped_early()
+    public function it_can_be_stopped_early(): void
     {
         $concurrency = 20;
         $stoppingPoint = $concurrency / 5;
@@ -390,7 +390,7 @@ class PoolTest extends TestCase
     }
 
     /** @test */
-    public function it_writes_large_serialized_tasks_to_file()
+    public function it_writes_large_serialized_tasks_to_file(): void
     {
         $pool = Pool::create()->maxTaskPayload(10);
 
